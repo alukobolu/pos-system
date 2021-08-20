@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %} Inventory || POS {% endblock %}
+
+{% block content %}
+{% load static %}
+    <style type="text/css">
+        .item_list img {
+            width: 100%;
+        }
+    </style>
+    
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="" method="get" style="margin-bottom: 10px;" class="form-inline">
+                    <input type="text" name="q" style="width: 30%;" class="form-control rounded" placeholder="Search" aria-label="Search"aria-describedby="search-addon" >
+                    <button type="submit" class="btn btn-primary btn-md">Search</button>
+                </form>
+            </div>
+            <div class="col-md-7">
+                <div class="nav-tabs-custom">
+                    
+                    <ul class="nav nav-tabs">
+                        <li class="Categoryx" ><a href="#Categoryx" data-toggle="tab">Items</a></li>
+                        {% if  categories %}
+                            {% for obj in categories %}
+                            <li class="Category{{ forloop.counter0 }}" ><a href="#Category{{ forloop.counter0 }}" data-toggle="tab">{{ obj.name }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane Categoryx" id="Categoryx">
+                            <div class="item_list">
+                                <div class="row">
+                                    {% if cosmetic %}
+                                        {% for obj in cosmetic %}
+                                            <div class="col-lg-3">
+                                                <a href="{% url 'cart_add' obj.id %}">
+                                                    <img src="{{ obj.picture.url }}" alt="">
+                                                    <h5 class="box-title">{{ obj.name }}</h5>
+                                                </a>
+                                                <p class="box-comment">N {{ obj.sales_price }}</p>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if cosmetic.has_previous %}
+                                            <button class="btn btn-success btn-sm"><a style="color: white;" href="?main_page=1">&laquo; first</a></button>
+                                            <button class="btn btn-success btn-sm"><a style="color: white;" href="?main_page={{ cosmetic.previous_page_number }}">previous</a></button>
+                                        {% endif %}
+                                
+                                        <span class="current">
+                                            Page {{ cosmetic.number }} of {{ cosmetic.paginator.num_pages }}.
+                                        </span>
+                                
+                                        {% if cosmetic.has_next %}
+                                            <button class="btn btn-success btn-sm"><a style="color: white;" href="?main_page={{ cosmetic.next_page_number }}">next</a></button>
+                                            <button class="btn btn-success btn-sm"><a style="color: white;" href="?main_page={{ cosmetic.paginator.num_pages }}">last &raquo;</a></button>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% if group %}
+                            {% for obj1 in group %}
+                                <div class="tab-pane Category{{ forloop.counter0 }}" id="Category{{ forloop.counter0 }}">
+                                    <div class="item_list">
+                                        <div class="row">  
+                                            {% if obj1  %}
+                                                {% for obj in obj1 %}           
+                                                    <div class="col-lg-3">
+                                                        <a href="{% url 'cart_add' obj.id %}">
+                                                            <img src="{{ obj.picture.url }}" alt="">
+                                                            <h5 class="box-title">{{ obj.name }}</h5>
+                                                        </a>
+                                                        <p class="box-comment">N {{ obj.sales_price }}</p>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="pagination">
+                                            <span class="step-links">
+                                                {% if obj1.has_previous %}
+                                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page{{ forloop.counter0 }}=1">&laquo; first</a></button>
+                                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page{{ forloop.counter0 }}={{ obj1.previous_page_number }}">previous</a></button>
+                                                {% endif %}
+                                        
+                                                <span class="current">
+                                                    Page {{ obj1.number }} of {{ obj1.paginator.num_pages }}.
+                                                </span>
+                                        
+                                                {% if obj1.has_next %}
+                                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page{{ forloop.counter0 }}={{ obj1.next_page_number }}">next</a></button>
+                                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page{{ forloop.counter0 }}={{ obj1.paginator.num_pages }}">last &raquo;</a></button>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+            <script type='text/javascript'>
+                $('a[data-toggle="tab"]').on('click', function (e) {
+                    console.log("tab shown...");
+                    localStorage.setItem('activeTab', $(e.target).attr('href'));
+                });
+                
+                // read hash from page load and change tab
+                var activeTab = localStorage.getItem('activeTab');
+                if(activeTab){
+                    console.log(activeTab);
+                    var classes ='.' + activeTab.substring(1) +''
+                    console.log(classes);
+                    $(""+classes+"").addClass("active");
+                }else{
+                    $(".Categoryx").addClass("active");
+                }
+            </script>
+            <div class="col-md-5">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <div class="box-header">
+                            <h4 class="box-title">12:00 PM</h4>
+                        </div>
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h3 class="box-title">Default Customer</h3>
+                                    </div>
+                                    <div class="col-lg-6 text-right">
+                                        <h3 class="box-title"><a href="#"><i class="fa fa-plus"></i></a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Method</th>
+                                        <th>Quantity</th>
+                                        <th>Del</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        {% for item in cart %}
+                                            {% with product=item.product %}
+                                                <td>{{ product.name }}</td>
+                                                
+                                                
+                                                <form action="{% url 'cart_updated' product.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <td>
+                                                        <input style="width: 50px" type="number" name="price"
+                                                               value="{{ item.update_quantity_form.price }}" min="1">
+                                                    </td>
+                                                    <td>
+                                                        <select name="method">
+                                                            <option value="cash" {% if item.update_quantity_form.method == "cash" %} selected="selected" {% endif %} >Cash</option>
+                                                            <option value="POS" {% if item.update_quantity_form.method == "POS" %} selected="selected" {% endif %} >POS</option>
+                                                            <option value="Tranfer" {% if item.update_quantity_form.method == "Tranfer" %} selected="selected" {% endif %} >Tranfer</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input style="width: 30px" type="number" name="number"
+                                                               value="{{ item.update_quantity_form.quantity }}" min="1">
+                                                        <button type="submit" class="btn btn-success btn-sm">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                    </td>
+                                                </form>
+                                                
+                                                <td>
+                                                    <a href="{% url 'cart_remove' product.id %}"
+                                                       title="cancel" class="icon"><i
+                                                            class="fa fa-trash-o"></i></a>
+                                                </td>
+                                                </tr>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a class="btn btn-primary" href="{% url 'bulling_information' %}">Pay</a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>Net Total: ৳ {{ cart.get_total_price }}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

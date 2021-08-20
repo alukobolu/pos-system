@@ -1,0 +1,52 @@
+<div class="box-body">
+    {% if product %}
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Charges</th>
+                <th>Created At</th>
+                <th>Total</th>
+                <th>Other Info</th>
+                <th class="text-center">Action</th>
+            </tr>
+            {% for obj in product %}
+                <tr>
+                    <td>{{ obj.title }}</td>
+                    <td>{{ obj.price }}</td>
+                    <td>{{ obj.addon }}</td>
+                    <td>{{ obj.created_at }}</td>
+                    <td>{{ obj.total_price }}</td>
+                    <td>{{ obj.other_info }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-info btn-sm" href="#"><i
+                                class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-sm" href="#"><i
+                                class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page=1">&laquo; first</a></button>
+                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.previous_page_number }}">previous</a></button>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.next_page_number }}">next</a></button>
+                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></button>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <h2>Product not added yet</h2>
+    {% endif %}
+</div>

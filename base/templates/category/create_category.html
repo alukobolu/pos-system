@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} Add new category {% endblock %}
+
+{% block content %}
+
+    <section class="content-header">
+        <h1> Dashboard <small>Add new Category</small></h1>
+        <ol class="breadcrumb">
+            <li><a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Category</li>
+        </ol>
+    </section>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h3 class="box-title">Add New Category</h3>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                <a title="Category list" data-toggle="tooltip" data-placement="left"
+                                   class="btn btn-info btn-sm" href="{% url 'category_list' %}">
+                                    <i class="fa fa-list"></i>
+                                </a>
+                            </div>
+                        </div>
+                        {% include 'common/message.html' %}
+                    </div>
+                    <div class="box-body">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="name">Category Name</label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Parent Category</label>
+                                        {{ form.parent }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="imageUpload">Upload</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            {{ form.category_image }}
+                                            <label class="custom-file-label" for="imageUpload">Category Image</label>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <label for="">Is Active</label>
+                                        {{ form.is_active }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

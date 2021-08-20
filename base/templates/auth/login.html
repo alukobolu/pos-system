@@ -1,0 +1,34 @@
+{% extends 'base_auth.html' %}
+
+{% block title %} Login page {% endblock %}
+
+{% block content %}
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                {{ form.password }}
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <label class="custom-control custom-checkbox">
+                            {{ form.remember_me }} Remember me
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block">Sign in</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="social-auth-links text-center">
+            <a href="#">Forgot password</a> |||
+            <a href="#">Register Member</a>
+        </div>
+    </div>
+{% endblock %}

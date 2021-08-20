@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Inventory || Order Record {% endblock %}
+
+{% block content %}
+
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h4 class="box-title">List of Order</h4>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Ordered Item</th>
+                                <th>Seller</th>
+                                <th>Method</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Order Date</th>
+                            </tr>
+                            {% if order %}
+                                {% for obj in order %}
+                                    <tr>
+                                        <td>{{ obj.products }}</td>
+                                        <td>{{ obj.orderItem.full_name }}</td>
+                                        <td>{{ obj.method }}</td>
+                                        <td>{{ obj.price }}</td>
+                                        <td>{{ obj.quantity }}</td>
+                                        <td>{{ obj.created_at }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </table>
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if page_obj.has_previous %}
+                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page=1">&laquo; first</a></button>
+                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.previous_page_number }}">previous</a></button>
+                                {% endif %}
+                        
+                                <span class="current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+                        
+                                {% if page_obj.has_next %}
+                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.next_page_number }}">next</a></button>
+                                    <button class="btn btn-success btn-sm"><a style="color: white;" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></button>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

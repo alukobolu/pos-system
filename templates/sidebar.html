@@ -1,0 +1,94 @@
+{% load static %}
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p>{% if request.user.first_name  or request.user.last_name %} {{ request.user.first_name }}
+                {{ request.user.last_name }} {% else %} {{ request.user.username }} {% endif %}</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+    </div>
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <span class="pull-right-container">
+            </span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span>Configuration</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'create_category' %}"><i class="fa fa-circle-o"></i> Add Category</a></li>
+                <li><a href="{% url 'category_list' %}"><i class="fa fa-circle-o"></i> All Category</a></li>
+                <li><a href="{% url 'create_list_tag' %}"><i class="fa fa-circle-o"></i> All Tag</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>Inventory</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'inventory_create' %}"><i class="fa fa-circle-o"></i> Add Inventory</a></li>
+                <li><a href="{% url 'inventory_list' %}"><i class="fa fa-circle-o"></i> All Inventory</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-product-hunt"></i>
+                <span>ATM</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'product_create' %}"><i class="fa fa-circle-o"></i> Perform task</a></li>
+                <li><a href="{% url 'product_list' %}"><i class="fa fa-circle-o"></i> All transactions</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-first-order"></i>
+                <span>Point of Sale</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'pos_view' %}"><i class="fa fa-circle-o"></i> Create Order</a></li>
+                <li><a href="{% url 'order_information' %}"><i class="fa fa-circle-o"></i> Order Record</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-gears"></i>
+                <span>Setting</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Password Change</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Add User</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> All User</a></li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<!-- /.sidebar -->
