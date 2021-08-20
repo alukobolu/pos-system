@@ -3,5 +3,4 @@ venv
 env
 media
 __pycache__
-static
 .DS_Store
