@@ -118,7 +118,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 #  Add configuration for static files storage using whitenoise
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django Message Framework
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
