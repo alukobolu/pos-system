@@ -17,8 +17,6 @@ class Cart(object):
         print(price)
         if price == None:
             price = product.sales_price
-        if method =="POS":
-            price = int(price) + 50
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0, 'price': str(price), 'method': method}
         if update_quantity:
