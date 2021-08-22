@@ -1,3 +1,4 @@
+from decimal import Decimal
 from base.models import OrderItem,Inventory
 from base.models import Cart as ModelCart
 from django.shortcuts import render, redirect
@@ -14,7 +15,8 @@ def bulling_information_view(request):
             order = form.save()
 
             instance =  ModelCart()
-            instance.total = cart.get_total_price
+            total = cart.get_total_price()
+            instance.total = Decimal(total)
             instance.save()
 
             for item in cart:

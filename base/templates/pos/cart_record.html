@@ -23,7 +23,7 @@
                                 {% for obj in cart %}
                                     <tr>
                                         <td>
-                                            {% for o in obj.products.all() %}
+                                            {% for o in obj.products.all %}
                                             {{ o.name }} | &nbsp;
                                             {% endfor %}
                                         </td>

@@ -57,12 +57,12 @@ class Inventory(BaseEntity):
 
 class Cart(BaseEntity):
     products = models.ManyToManyField(Inventory, null=True)
-    method = models.CharField(max_length=250,default='cash',null=True,blank=True)
+    method = models.CharField(max_length=250,default='cash',blank=True)
     total = models.DecimalField(max_digits=100, decimal_places=2, default=0.00)
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.total
+        return str(self.total)
 
 
 class Customer(BaseEntity):

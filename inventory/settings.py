@@ -26,7 +26,7 @@ SECRET_KEY = '4p+kl-7x3t8snrlseu$f)_cmx%gua(lbv723*r+^xpap!%b97v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ayolayopos.herokuapp.com']
+ALLOWED_HOSTS = ['ayolayopos.herokuapp.com','127.0.0.1']
 
 # Application definition
 
