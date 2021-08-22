@@ -21,7 +21,7 @@ def bulling_information_view(request):
                 
                 instance.products.add(item['product'])
                 instance.save()
-                
+
                 OrderItem.objects.create(
                     orderItem=order,
                     products=item['product'],
@@ -32,7 +32,8 @@ def bulling_information_view(request):
                 inv =Inventory.objects.get(id=item['product'].id)
                 inv.current_stock = inv.current_stock - int(item['quantity'])
                 inv.save()
-                
+            instance.method = item['method']
+            instance.save()
             cart.clear()
         return redirect('pos_view')
     else:
@@ -44,4 +45,11 @@ class OrderItemView(ListView):
     template_name = 'pos/order_list.html'
     model = OrderItem
     context_object_name = 'order'
+    paginate_by = 10
+
+
+class CartView(ListView):
+    template_name = 'pos/cart_record.html'
+    model = ModelCart
+    context_object_name = 'cart'
     paginate_by = 10

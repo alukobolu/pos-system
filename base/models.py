@@ -27,7 +27,7 @@ class ATM(BaseEntity):
     addon = models.IntegerField(default=0)
     total_price = models.IntegerField(default=0)
     other_info = models.TextField(null=True)
-    date = models.DateField(null=True, default=now())
+    date = models.DateField(null=True, auto_now=True)
     def __str__(self):
         return self.title
 
@@ -57,6 +57,7 @@ class Inventory(BaseEntity):
 
 class Cart(BaseEntity):
     products = models.ManyToManyField(Inventory, null=True)
+    method = models.CharField(max_length=250,default='cash',null=True,blank=True)
     total = models.DecimalField(max_digits=100, decimal_places=2, default=0.00)
     active = models.BooleanField(default=True)
 
@@ -106,7 +107,7 @@ class OrderItem(BaseEntity):
     products = models.ForeignKey(Inventory, related_name='order_items', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
-    date = models.DateField(null=True, default=now())
+    date = models.DateField(null=True, auto_now=True)
     def __str__(self):
         return f'{self.id}'
 
