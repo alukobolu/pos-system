@@ -49,3 +49,4 @@ class InventoryUpdateView(UpdateView):
 class InventoryDeleteView(DeleteView):
     template_name = 'inventory/inventory_confirm_delete.html'
     model = Inventory
+    success_url = '/inventory/'
