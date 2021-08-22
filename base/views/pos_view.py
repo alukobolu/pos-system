@@ -17,7 +17,7 @@ class POSView(View):
             for item in cart:
                 item['update_quantity_form'] = {'quantity': item['quantity'],'price': item['price'] ,'method': item['method'] ,'update': True}
             
-            paginator = Paginator(last, 1) 
+            paginator = Paginator(last, 8) 
             page_number = request.GET.get('main_page')
             page_obj = paginator.get_page(page_number)
             
@@ -30,7 +30,7 @@ class POSView(View):
             for i,cat in enumerate(cate):
                 if Inventory.objects.filter(category_name=cat).exists() == True:
                     product = Inventory.objects.filter(category_name=cat)
-                    paginator = Paginator(product, 1) 
+                    paginator = Paginator(product, 8) 
                     li = 'page'+str(i)
                     page_number = request.GET.get(li)
                     page_obj = paginator.get_page(page_number)
