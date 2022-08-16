@@ -159,7 +159,7 @@
                                                 <td>{{ product.name }}</td>
                                                 
                                                 
-                                                <form action="{% url 'cart_updated' product.id %}" method="post">
+                                                <form action="{% url 'cart_update' product.id %}" method="post">
                                                     {% csrf_token %}
                                                     <td>
                                                         <input style="width: 50px" type="number" name="price"

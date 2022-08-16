@@ -7,7 +7,7 @@ from base.views.inventory_view import CreateInventoryView, InventoryListView, In
 from base.views.tag_view import CreateListTagView, TagDeleteView
 from base.views.product_view import CreateProductView, ProductListView
 
-from base.views.pos_view import POSView, cart_add, cart_updated, cart_remove
+from base.views.pos_view import POSView, Cart_add, Cart_discount ,  Cart_update, Cart_remove
 from base.views.order_views import bulling_information_view, OrderItemView, CartView
 
 urlpatterns = [
@@ -28,9 +28,10 @@ urlpatterns = [
     path('tag/<pk>/', TagDeleteView.as_view(), name='tag_delete'),
     path('create-product/', CreateProductView.as_view(), name='product_create'),
     path('product-list/', ProductListView.as_view(), name='product_list'),
-    path('cart/<int:id>/', cart_add, name='cart_add'),
-    path('cart-update/<int:id>/', cart_updated, name='cart_updated'),
-    path('cart-remove/<int:id>/', cart_remove, name='cart_remove'),
+    path('cart/<int:id>/', Cart_add.as_view(), name='cart_add'),
+    path('cart-update/<int:id>/', Cart_update.as_view(), name='cart_update'),
+    path('cart-discount/<int:id>/', Cart_discount.as_view(), name='cart_discount'),
+    path('cart-remove/<int:id>/', Cart_remove.as_view(), name='cart_remove'),
     path('pos/', POSView.as_view(), name='pos_view'),
     path('bulling-infromation/', bulling_information_view, name='bulling_information'),
     path('order-infromation/', OrderItemView.as_view(), name='order_information'),

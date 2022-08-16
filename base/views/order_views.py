@@ -5,8 +5,7 @@ from django.shortcuts import render, redirect
 from base.forms.order_form import OrderForm
 from base.addcart import Cart
 from django.views.generic import ListView
-
-
+    
 def bulling_information_view(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -15,7 +14,9 @@ def bulling_information_view(request):
             order = form.save()
 
             instance =  ModelCart()
-            total = cart.get_total_price()
+            discount = request.POST['discount']
+            cart.set_final_price(discount)
+            total = cart.get_final_price()
             instance.total = Decimal(total)
             instance.save()
 
